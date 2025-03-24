@@ -89,6 +89,7 @@ func (l *LanguagesNonPgtype) Load(remote_path string) {
 			log.Error().Str("key", k).Str("value", string(mv)).Err(err).Msg("failed to unmarshal language config back to struct")
 			return
 		}
+		language.Name = k
 		*l = append(*l, language)
 	}
 }
@@ -160,6 +161,27 @@ func (l LanguagesNonPgtype) ToPgType() []Language {
 		dbLanguages = append(dbLanguages, dbLanguage)
 	}
 	return dbLanguages
+}
+
+func LanguageColumns() []string {
+	return []string{
+		"id",
+		"name",
+		"fs_name",
+		"type",
+		"aliases",
+		"ace_mode",
+		"codemirror_mode",
+		"codemirror_mime_type",
+		"wrap",
+		"extensions",
+		"filenames",
+		"interpreters",
+		"language_id",
+		"color",
+		"tm_scope",
+		"group",
+	}
 }
 
 // MarshalZerologObject implements zerolog.LogObjectMarshaler interface to enable structured logging of Language objects

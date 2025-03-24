@@ -49,7 +49,7 @@ func migrate(cmd *cobra.Command, args []string) {
 		if _, err := app.Conn.CopyFrom(
 			cmd.Context(),
 			[]string{"languages"},
-			[]string{"id", "name", "fs_name", "type", "aliases", "ace_mode", "codemirror_mode", "codemirror_mime_type", "wrap", "extensions", "filenames", "interpreters", "language_id", "color", "tm_scope", "group"},
+			db.LanguageColumns(),
 			languageSource,
 		); err != nil {
 			log.Error().Err(err).Msg("failed to insert language batch to languages table")
