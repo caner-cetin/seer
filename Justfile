@@ -18,6 +18,19 @@ setup:
 tidy:
     go mod tidy
 
+install package:
+    #!/usr/bin/env sh
+    if [ {{package}} == "goose" ]; then
+        go install github.com/pressly/goose/v3/cmd/goose@latest
+    elif [ {{package}} == "sqlc" ]; then
+        go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+    else
+        echo "usage: just install [goose / sqlc]"
+    fi
+
+generate:
+    sqlc generate
+    
 build: clean setup tidy
     #!/usr/bin/env sh
     GOOS=linux GOARCH=amd64 go build {{build_flags}} -o {{build_dir}}/{{name}}-linux-amd64

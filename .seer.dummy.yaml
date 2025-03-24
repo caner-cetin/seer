@@ -1,0 +1,10 @@
+db:
+  auth:
+    user: 
+    password:
+    host:
+    port:
+    database:
+# random ascii art will be printed when help message is displayed
+# no nsfw art, trust me.
+display_ascii_art_on_help: true
